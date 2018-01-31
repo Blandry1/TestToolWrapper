@@ -1,39 +1,39 @@
-
 # from app import app
-
-from flask import Flask, render_template, url_for, send_from_directory, request, make_response
-from flask_restplus import Resource, Api
-from flask_cors import CORS, cross_origin
-import requests 
-
-app = Flask(__name__)
-api = Api(app)
-CORS(app)
 
 #from apis import blueprint as api
 #from nodes import blueprint as api
 #app.register_blueprint(run)
 
+from flask import Flask, render_template, url_for, send_from_directory, request, make_response
+from flask_restplus import Resource, Api, reqparse, fields, Namespace
+from flask_cors import CORS, cross_origin
+import requests 
+app = Flask(__name__)
+api = Api(app)
+CORS(app)
+
+
 #======== views ===========
 
 
-@app.route('/sayHello')
+@api.route('/sayHello')
 def hello_world():
     return "Hello World!"
 
-@app.route('/tryGET', methods=['GET'])
-def testAccess():
-    try:
-        url = 'https://www.google.com/'
-        r = requests.get(url)
-        data = r.text
-        return data
+@api.route('/tryGET', methods=['GET'])
+class testAccess(Resource):
+    def get(self):
+        try:
+            url = 'https://www.google.com/'
+            r = requests.get(url)
+            data = r.text
+            return data
 
-    except Exception as exc:
-        message = 'Something went wrong ' + str(exc)
-        return message, 500
+        except Exception as exc:
+            message = 'Something went wrong ' + str(exc)
+            return message, 500
   
-@app.route('/tryPOST', methods=['POST'])
+@api.route('/tryPOST', methods=['POST'])
 def my_awesome_endpoint():
     data = request.json
     return data
