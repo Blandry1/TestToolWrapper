@@ -8,3 +8,7 @@ def index():
 @app.route('/about')
 def about():
     return render_template("about.html")
+
+# @run2.post
+# def WTF(127, 8888, abc)
+#     print(value)
