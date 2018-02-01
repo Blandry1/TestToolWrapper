@@ -1,31 +1,41 @@
 
 import requests
 import json
+import uuid
 from flask import Flask, request, json, jsonify
-from flask_restplus import Resource, Api
+from flask_restplus import Resource, Api, Resource, reqparse
 
 
 app = Flask(__name__)
 api = Api(app, title='TMS Classification for - Function Test')
 
 rbt = api.namespace('RBT Test', description='Risk-based Testing, Sanity and Regression | accessible by API, no CLI')
-ns = api.namespace('practice', description='Practice operations')
+ns = api.namespace('practice', description='Practice operations') 
 
 @rbt.route('/rbt')
 class ConnectToTestTool(Resource): 
+
+    #@api.expect()
+    @api.doc(responses={
+        200: 'Success',
+        400: 'Validation Error',
+        500: 'Internal Server Error'
+    })
+    
     def get(self):
         #url = 'http://' + host + port + resource + responder + id
         url = 'http://httpbin.org/get'
         r = requests.get(url)
         data = r.text
-        #data = r.request.body
+        d = json.loads(data)
+        print (d)
         
         #datajson = json.load(r)
         #datajson = r.json()['form']
         #datajson = request.get_json()
         #datajson = json.loads(request.data)
 
-        return data
+        return d
 
 @rbt.route('/rbt/<string:TC>/<string:responder>/<string:tag>/')    
 class TestTool(Resource):
