@@ -1,0 +1,1 @@
+ns = api.namespace('blog/categories', description='send parameters url')

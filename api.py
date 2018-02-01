@@ -14,30 +14,45 @@ ns = api.namespace('practice', description='Practice operations')
 @rbt.route('/rbt')
 class ConnectToTestTool(Resource): 
     def get(self):
-        url = 'https://api.github.com/events'
+        #url = 'http://' + host + port + resource + responder + id
+        url = 'http://httpbin.org/get'
         r = requests.get(url)
         data = r.text
-
+        #data = r.request.body
+        
         #datajson = json.load(r)
         #datajson = r.json()['form']
         #datajson = request.get_json()
         #datajson = json.loads(request.data)
 
-        #data = r.text
-        #data = r.request.data
         return data
 
-    def post(self, host, port, resource, responder, id, animals):
-        # url = 'http://httpbin.org/post/'
-        # url = '{host}/{port}/{resource}/{responder}/{id}/'.format(host, port, resource, responder, test-id)
-        url = 'http://' + host + port + resource + responder + id
-        
-        #r = requests.post(url, data = {'animalFarm': animals, 'dessert': 'ocean'})
-        r = requests.post(url, data={'interests': ['football', 'basketball']})
+@rbt.route('/rbt/<string:TC>/<string:responder>/<string:tag>/')    
+class TestTool(Resource):
+    def get(self, TC, responder, tag):
+        url = 'http://httpbin.org/get'
+        tag = tag   # TODO: tag goes to a grouping file. Grouping would be done backend and hardcoded.
+        parameters = {"TC": TC, 'responder': responder}
+        r = requests.get(url, parameters)
         data = r.text
-        #data = r.request.body
+        #TODO: send data variable to log file.
         return data
+
+
+
+
+    # def post(self, host, port, resource, responder, id, animals):
+    #     # url = 'http://httpbin.org/post/'
+    #     # url = '{host}/{port}/{resource}/{responder}/{id}/'.format(host, port, resource, responder, test-id)
+    #     url = 'http://' + host + port + resource + responder + id
+        
+    #     #r = requests.post(url, data = {'animalFarm': animals, 'dessert': 'ocean'})
+    #     r = requests.post(url, data={'interests': ['football', 'basketball']})
+    #     data = r.text
+    #     #data = r.request.body
+    #     return data
     
+
     # def post(self, test_id):
     #     url = 'http://httpbin.org/post/test_id'
     #     r = requests.post(url, data = {'key':'value'})
@@ -68,12 +83,6 @@ class ConnectToTestTool(Resource):
 #     def put(self, todo_id):
 #         todos[todo_id] = request.form['data']
 #         return {todo_id: todos[todo_id]}
-
-# @ns.route('/hello')
-# class HelloWorld(Resource):
-#     def get(self):
-#         return {'hello2': 'world'}
-
 
     
 if __name__ == '__main__':
