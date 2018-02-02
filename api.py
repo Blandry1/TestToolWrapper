@@ -29,11 +29,13 @@ class ConnectToTestTool(Resource):
         data = r.text
         jsonData = json.loads(data)
         #specific_jsonData = json.loads(data)['headers']
+
+        with open('test_logs.txt', 'a+') as outfile: # in json-format
+            json.dump(jsonData, outfile, sort_keys = False, indent = 4, ensure_ascii = False)
         
-        #TODO: send jsonData variable to log file.
-        f = open('test_logs.txt', 'a')
-        f.write(jsonData) # change this line of code!!!
-        f.close()
+        # f = open('test_logs.txt', 'a+') # in string-format
+        # f.write(data)
+        # f.close()
 
         return jsonData
 
@@ -53,6 +55,9 @@ class TestTool(Resource):
         r = requests.get(url, parameters)
         data = r.text
         jsonData = json.loads(data)
+
+        with open('test_logs.txt', 'a+') as outfile:
+            json.dump(jsonData, outfile, sort_keys = False, indent = 4, ensure_ascii = False)
         
         return jsonData
 
