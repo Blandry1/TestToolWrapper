@@ -7,38 +7,12 @@ from flask_restplus import Resource, Api, Resource, reqparse
 
 
 app = Flask(__name__)
-api = Api(app, title='TMS Classification for - Function Test')
+api = Api(app, title='TMS Classification for - Function Test') # TODO: change for each UT, ST, VA
 
 rbt = api.namespace('RBT Test', description='Risk-based Testing, Sanity and Regression | accessible by API, no CLI')
-ns = api.namespace('practice', description='Practice operations') 
+#TODO: change to arq, JUNIT
 
-@rbt.route('/rbt')
-class ConnectToTestTool(Resource): 
-
-    #@api.expect()
-    @api.doc(responses={
-        200: 'Success',
-        400: 'Validation Error',
-        500: 'Internal Server Error'
-    })
-    
-    def get(self):
-        #url = 'http://' + host + port + resource + responder + id
-        url = 'http://httpbin.org/get'
-        r = requests.get(url)
-        data = r.text
-        jsonData = json.loads(data)
-        #specific_jsonData = json.loads(data)['headers']
-
-        with open('test_logs.txt', 'a+') as outfile: # in json-format
-            json.dump(jsonData, outfile, sort_keys = False, indent = 4, ensure_ascii = False)
-        
-        # f = open('test_logs.txt', 'a+') # in string-format
-        # f.write(data)
-        # f.close()
-
-        return jsonData
-
+#TODO: change to arq.route('/arq/<string:TC>/<string:responder>/<string:tag>/') 
 @rbt.route('/rbt/<string:TC>/<string:responder>/<string:tag>/')    
 class TestTool(Resource):
 
@@ -56,14 +30,14 @@ class TestTool(Resource):
         data = r.text
         jsonData = json.loads(data)
 
-        with open('test_logs.txt', 'a+') as outfile:
+        with open('Test_Logs.txt', 'a+') as outfile:
             json.dump(jsonData, outfile, sort_keys = False, indent = 4, ensure_ascii = False)
         
         return jsonData
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=5001)
+    app.run(host='0.0.0.0', debug=True, port=5001) # TODO: change port for each microservice
 
 
 ###-------------------------###
