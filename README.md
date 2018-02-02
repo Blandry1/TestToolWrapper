@@ -1,5 +1,7 @@
 # TestToolWrapper
+
 Basic Learning
+
 https://learnxinyminutes.com/docs/python3/
 http://michal.karzynski.pl/blog/2016/06/19/building-beautiful-restful-apis-using-flask-swagger-ui-flask-restplus/
 https://media.readthedocs.org/pdf/flask-restplus/latest/flask-restplus.pdf
@@ -14,6 +16,7 @@ https://github.com/noirbizarre/flask-restplus
 https://github.com/mfekihahmed/Aloha-IoT-OneMarket/tree/master/backend
 
 RBT
+
 http://www.fitnesse.org/FitNesse.FullReferenceGuide.UserGuide.WritingAcceptanceTests.TestSuites.TagsAndFilters
 http://www.fitnesse.org/FitNesse.FullReferenceGuide.UserGuide.AdministeringFitNesse.RestfulServices
 http://www.squadco.com/presentations/FitNesseREST.pdf
