@@ -6,7 +6,7 @@ from flask_restplus import Resource, Api, Resource, reqparse
 
 
 app = Flask(__name__)
-api = Api(app, title='TMS Classification for - Unit Test')
+api = Api(app, title='Unit Test')
 
 gtest = api.namespace('gTest', description='Accessible by API and CLI')
 arq = api.namespace('Arquillian', description='Accessible by API and CLI')

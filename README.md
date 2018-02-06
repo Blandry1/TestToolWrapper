@@ -14,6 +14,7 @@ https://nordicapis.com/ultimate-guide-to-30-api-documentation-solutions/
 
 https://github.com/noirbizarre/flask-restplus
 https://github.com/mfekihahmed/Aloha-IoT-OneMarket/tree/master/backend
+http://flask.pocoo.org/docs/dev/cli/
 
 RBT
 

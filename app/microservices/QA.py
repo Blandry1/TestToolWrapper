@@ -6,7 +6,7 @@ from flask_restplus import Resource, Api, Resource, reqparse
 
 
 app = Flask(__name__)
-api = Api(app, title='TMS Classification for - Quality Assurance')
+api = Api(app, title='Quality Assurance')
 
 pureload = api.namespace('Pureload', description='API executes commands, and results are retrieved by CLI')
 appdynamics = api.namespace('AppDynamics', description='Accessible by API and CLI')

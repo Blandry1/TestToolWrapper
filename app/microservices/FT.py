@@ -1,16 +1,22 @@
 import requests
 import json
 import uuid
-from flask import Flask, request, json, jsonify
+from flask import Flask, request, json, jsonify, Blueprint
 from flask_restplus import Resource, Api, Resource, reqparse
 
 
 app = Flask(__name__)
-api = Api(app, title='TMS Classification for - Function Test')
+
+api = Api(app, title='Function Test')
+
+#blueprint = Blueprint('api', __name__, url_prefix='/test')
+#api = Api(blueprint)
+#app.register_blueprint(blueprint)
 
 rbt = api.namespace('RBT', description='Accessible by API')
 junit = api.namespace('JUnit', description='Accessible by API and CLI')
 rocket = api.namespace('Rocket', description='Accessible by API')
+
 
 
 @rbt.route('/<string:TC>/<string:responder>/<string:tag>/Test1')    
@@ -34,6 +40,18 @@ class RBT(Resource):
         with open('Tests_Logs.txt', 'a+') as outfile:
             json.dump(jsonData, outfile, sort_keys = False, indent = 4,
                ensure_ascii = False)
+
+        return jsonData
+
+    def get2(self):
+        url = 'http://httpbin.org/get'
+        r = requests.get(url)
+        data = r.text
+        jsonData = json.loads(data)
+        #specific_jsonData = json.loads(data)['headers']
+
+        with open('test_logs.txt', 'a+') as outfile: # in json-format
+            json.dump(jsonData, outfile, sort_keys = False, indent = 4, ensure_ascii = False)
 
         return jsonData
 

@@ -1,0 +1,57 @@
+{
+    "origin": "192.75.88.130",
+    "headers": {
+        "Connection": "close",
+        "Host": "httpbin.org",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept": "*/*",
+        "User-Agent": "python-requests/2.18.4"
+    },
+    "args": {
+        "responder": "dogs",
+        "TC": "test123"
+    },
+    "url": "http://httpbin.org/get?responder=dogs&TC=test123"
+}{
+    "origin": "192.75.88.130",
+    "headers": {
+        "Connection": "close",
+        "Host": "httpbin.org",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept": "*/*",
+        "User-Agent": "python-requests/2.18.4"
+    },
+    "args": {
+        "responder": "dogs",
+        "TC": "test123"
+    },
+    "url": "http://httpbin.org/get?responder=dogs&TC=test123"
+}{
+    "origin": "192.75.88.130",
+    "headers": {
+        "Connection": "close",
+        "Host": "httpbin.org",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept": "*/*",
+        "User-Agent": "python-requests/2.18.4"
+    },
+    "args": {
+        "responder": "2",
+        "TC": "3"
+    },
+    "url": "http://httpbin.org/get?responder=2&TC=3"
+}{
+    "origin": "192.75.88.130",
+    "headers": {
+        "Connection": "close",
+        "Host": "httpbin.org",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept": "*/*",
+        "User-Agent": "python-requests/2.18.4"
+    },
+    "args": {
+        "responder": "2",
+        "TC": "3"
+    },
+    "url": "http://httpbin.org/get?responder=2&TC=3"
+}

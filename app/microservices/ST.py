@@ -6,7 +6,7 @@ from flask import Flask, request, json, jsonify
 from flask_restplus import Resource, Api, Resource, reqparse
 
 app = Flask(__name__)
-api = Api(app, title='TMS Classification for - Software Test')
+api = Api(app, title='Software Test')
 
 pureload = api.namespace('Pureload', description='UNIQUE Access: API executes commands, results are retrieved by CLI')
 

@@ -6,7 +6,7 @@ from flask import Flask, request, json, jsonify
 from flask_restplus import Resource, Api, Resource, reqparse
 
 app = Flask(__name__)
-api = Api(app, title='TMS Classification for - Softwares Function Test') 
+api = Api(app, title='Softwares Function Test') 
 
 cisCat = api.namespace('CIS-CAT', description='accessible by CLI')
 openVas = api.namespace('OpenVAS', description='accesible by API & CLI')
