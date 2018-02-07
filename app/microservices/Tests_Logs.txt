@@ -8,10 +8,11 @@
         "User-Agent": "python-requests/2.18.4"
     },
     "args": {
-        "responder": "dogs",
-        "TC": "test123"
+        "responder": "1",
+        "resource": "2",
+        "tag": "3"
     },
-    "url": "http://httpbin.org/get?responder=dogs&TC=test123"
+    "url": "http://httpbin.org/get?responder=1&resource=2&tag=3"
 }{
     "origin": "192.75.88.130",
     "headers": {
@@ -22,10 +23,11 @@
         "User-Agent": "python-requests/2.18.4"
     },
     "args": {
-        "responder": "dogs",
-        "TC": "test123"
+        "responder": "1",
+        "resource": "2",
+        "tag": "3"
     },
-    "url": "http://httpbin.org/get?responder=dogs&TC=test123"
+    "url": "http://httpbin.org/get?responder=1&resource=2&tag=3"
 }{
     "origin": "192.75.88.130",
     "headers": {
@@ -36,10 +38,11 @@
         "User-Agent": "python-requests/2.18.4"
     },
     "args": {
-        "responder": "2",
-        "TC": "3"
+        "responder": "1",
+        "resource": "2",
+        "tag": "3"
     },
-    "url": "http://httpbin.org/get?responder=2&TC=3"
+    "url": "http://httpbin.org/get?responder=1&resource=2&tag=3"
 }{
     "origin": "192.75.88.130",
     "headers": {
@@ -50,8 +53,24 @@
         "User-Agent": "python-requests/2.18.4"
     },
     "args": {
-        "responder": "2",
-        "TC": "3"
+        "responder": "1",
+        "resource": "2",
+        "tag": "3"
     },
-    "url": "http://httpbin.org/get?responder=2&TC=3"
+    "url": "http://httpbin.org/get?responder=1&resource=2&tag=3"
+}{
+    "origin": "192.75.88.130",
+    "headers": {
+        "Connection": "close",
+        "Host": "httpbin.org",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept": "*/*",
+        "User-Agent": "python-requests/2.18.4"
+    },
+    "args": {
+        "responder": "?suite",
+        "resource": "1",
+        "tag": "afg"
+    },
+    "url": "http://httpbin.org/get?responder=%3Fsuite&resource=1&tag=afg"
 }
