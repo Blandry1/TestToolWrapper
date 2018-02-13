@@ -1,0 +1,17 @@
+.idea/
+**/*.pyc
+**/__pycache__
+.ipynb_checkpoints/
+*.ipynb
+static/*
+.tox/*
+dist/*
+static/*
+build/*
+*.egg*
+ChangeLog
+AUTHORS
+.python-version
+**/*.log*
+**/demo/**/*.json
+test.py

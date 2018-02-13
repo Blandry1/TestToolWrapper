@@ -1,32 +1,38 @@
 import requests
 import json
-import uuid
 from flask import Flask, request, json, jsonify, Blueprint
-from flask_restplus import Resource, Api, Resource, reqparse
-
+from flask_restplus import Resource, Api, reqparse, fields, SchemaModel
+import urllib2
+import untangle
+import re
 
 app = Flask(__name__)
-
-api = Api(app, title='Function Test')
-
-#blueprint = Blueprint('api', __name__, url_prefix='/test')
-#api = Api(blueprint)
-#app.register_blueprint(blueprint)
+api = Api(app, title='Function Test', doc='/FT')
 
 rbt = api.namespace('RBT', description='Accessible by API')
 junit = api.namespace('JUnit', description='Accessible by API and CLI')
 rocket = api.namespace('Rocket', description='Accessible by API')
 
+# model = rbt.model('Model', {
+#     'task': fields.String,
+#     'uri': fields.Url('todo_ep')
+# })
+
+# address = rbt.schema_model('Address', {
+#     'properties': {
+#         'road': {
+#             'type': 'string'
+#         },
+#     },
+#     'type': 'object'
+# })
+
 host='142.133.174.149'
 port=':8888'
-#resource = '/AfgVafgMasterSmokeTestSuites.TestSuiteVafgAll.TestSuiteVafgEnafGba'
-#responder = '?suite'
-#http://142.133.174.149:8888/AfgVafgMasterSmokeTestSuites.TestSuiteVafgAll.TestSuiteVafgEnafGba?suite
 
-@rbt.route('/<string:resource>/<string:responder>/<string:tag>')  
-@rbt.param('resource', 'url project tracing, i.e. test_ID')
-@rbt.param('responder', 'editable file results')
-@rbt.param('tag', 'grouping parameter')
+@rbt.route('/<string:url>/<string:tag>')
+@rbt.param('url', 'Relative Path for Test, i.e. AfgVafgMasterSmokeTestSuites.TestSuiteVafgAll.TestSuiteVafgEnafGba?suite&format=xml')
+@rbt.param('tag', 'Group Parameter, i.e. AFG, TNO')
 
 class RBT(Resource):
 
@@ -36,30 +42,27 @@ class RBT(Resource):
         500: 'Internal Server Error'
     })
 
-    def get(self, resource, responder, tag):
+    #@rbt.marshal_with(address)
+    def get(self, url , tag):
         '''TC#1 Definition'''
-        url2 = 'http://' + host +  port + '/' + resource + '?' +responder
-        print(url2)
+        url2 = 'http://' + host +  port + '/' + url
+        urllib2.unquote(url2).decode('utf8')
 
-
-        url = 'http://httpbin.org/get'
-       # url = 'http://142.133.174.149:8888/AfgApTestCases.TestCase0800SuccessAfgApAutGbaDigest?test'
+       # url = 'http://httpbin.org/get'
+        url3 = 'http://142.133.174.149:8888/AfgApTestCases.TestCase0800SuccessAfgApAutGbaDigest?test&format=xml'
         tag = tag   # TODO: tag goes to a grouping file. Grouping would be done backend and hardcoded.
-        parameters = {'resource': resource, 'responder':responder, 'tag': tag}
-        r = requests.get(url2)
+        r = requests.get(url3)
         data = r.text
-      
-        jsonData = json.loads(data)
 
-        with open('Tests_Logs.txt', 'a') as outfile:
-           json.dump(jsonData, outfile, sort_keys = False, indent = 4,
-              ensure_ascii = False)
+        f = open('Test_logs.xml', 'w') # in string-format
+        f.write(data)
+        f.close()
 
-        return jsondata
+        return data
 
-
-
-@junit.route('/<string:TC>/<string:responder>/<string:tag>/Test1')    
+@junit.route('/<string:url>/<string:tag>')
+@junit.param('url', 'Relative Path for Test, i.e. AfgVafgMasterSmokeTestSuites.TestSuiteVafgAll.TestSuiteVafgEnafGba?suite&format=xml')
+@junit.param('tag', 'Group Parameter, i.e. AFG, TNO')  
 class JUnit (Resource):
 
     @api.doc(responses={
@@ -68,24 +71,28 @@ class JUnit (Resource):
         500: 'Internal Server Error'
     })
 
-    def get(self, TC, responder, tag):
+    def get(self, url , tag):
         '''TC#1 Definition'''
-        url = 'http://httpbin.org/get'
+        url2 = 'http://' + host +  port + '/' + url
+        urllib2.unquote(url2).decode('utf8')
+
+       # url = 'http://httpbin.org/get'
+        url3 = 'http://142.133.174.149:8888/AfgApTestCases.TestCase0800SuccessAfgApAutGbaDigest?test&format=xml'
         tag = tag   # TODO: tag goes to a grouping file. Grouping would be done backend and hardcoded.
-        parameters = {"TC": TC, 'responder': responder}
-        r = requests.get(url, parameters)
+        r = requests.get(url3)
         data = r.text
-        jsonData = json.loads(data)
 
-        with open('Tests_Logs.txt', 'a+') as outfile:
-            json.dump(jsonData, outfile, sort_keys = False, indent = 4,
-               ensure_ascii = False)
+        f = open('Test_logs.xml', 'w') # in string-format
+        f.write(data)
+        f.close()
 
-        return jsonData
-
+        return data
 
 
-@rocket.route('/<string:TC>/<string:responder>/<string:tag>/Test1')    
+
+@rocket.route('/<string:url>/<string:tag>')
+@rocket.param('url', 'Relative Path for Test, i.e. AfgVafgMasterSmokeTestSuites.TestSuiteVafgAll.TestSuiteVafgEnafGba?suite&format=xml')
+@rocket.param('tag', 'Group Parameter, i.e. AFG, TNO')    
 class Rocket (Resource):
 
     @api.doc(responses={
@@ -94,21 +101,22 @@ class Rocket (Resource):
         500: 'Internal Server Error'
     })
 
-    def get(self, TC, responder, tag):
+    def get(self, url , tag):
         '''TC#1 Definition'''
-        url = 'http://httpbin.org/get'
+        url2 = 'http://' + host +  port + '/' + url
+        urllib2.unquote(url2).decode('utf8')
+
+       # url = 'http://httpbin.org/get'
+        url3 = 'http://142.133.174.149:8888/AfgApTestCases.TestCase0800SuccessAfgApAutGbaDigest?test&format=xml'
         tag = tag   # TODO: tag goes to a grouping file. Grouping would be done backend and hardcoded.
-        parameters = {"TC": TC, 'responder': responder}
-        r = requests.get(url, parameters)
+        r = requests.get(url3)
         data = r.text
-        jsonData = json.loads(data)
 
-        with open('Tests_Logs.txt', 'a+') as outfile:
-            json.dump(jsonData, outfile, sort_keys = False, indent = 4,
-               ensure_ascii = False)
+        f = open('Test_logs.xml', 'w') # in string-format
+        f.write(data)
+        f.close()
 
-        return jsonData
-
+        return data
 
 
 if __name__ == '__main__':
