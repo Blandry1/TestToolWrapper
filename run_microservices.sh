@@ -1,2 +1,2 @@
-cd TestToolWrapper/app/microservices
+cd app/microservices
 python FT.py
